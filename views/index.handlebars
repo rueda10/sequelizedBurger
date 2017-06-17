@@ -1,0 +1,53 @@
+<div class="burger-top">
+  <img src="https://www.fatburgercanada.com/wp-content/uploads/2015/07/king-burger-541x633.png" />
+  <h1>Eat-Da-Burger!</h1>
+
+</div>
+
+<div class="burger-form">
+  <h2>Enter a burger to eat</h2>
+  <form class="create-update-form" action="/" method="POST">
+    <div class="form-group">
+      <label for="burger-input">Burger Name:</label>
+      <input type="text" id="burger-input" name="burger_name">
+      <button type="submit">Add Burger</button>
+    </div>
+  </form>
+</div>
+
+<div class="burger-display">
+  <div class="devour-it">
+    <div class="section-label">BURGERS</div>
+    <ul>
+      {{#each burgers}}
+        {{#unless this.devoured}}
+          <li>
+            <span>
+              {{this.id}}. {{this.burger_name}}
+
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <div>
+                  <input type="hidden" name="devoured" value="true">
+                  <button type="submit">DEVOUR IT</button>
+                </div>
+              </form>
+            </span>
+          </li>
+        {{/unless}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="devoured">
+    <div class="section-label">BURGERS DEVOURED</div>
+    <ul>
+      {{#each burgers}}
+        {{#if this.devoured}}
+          <li>
+            {{this.id}}. {{this.burger_name}}
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</div>

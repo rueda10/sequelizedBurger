@@ -1,37 +1,50 @@
 var express = require("express");
-var burger = require("../models/burger.js");
+var db = require("../models");
+var _ = require('underscore');
 
 var router = express.Router();
 
 router.get("/", function(req, res) {
   // get request to '/' renders to selected entry to index.handlebars
-  burger.selectAll(function(data) {
+  db.burger.findAll({}).then(function(burgers) {
     var hbsObject = {
-      burgers: data
-    };
+      burgers: burgers
+    }
     res.render("index", hbsObject);
   });
+
 });
 
 router.post("/", function(req, res) {
   // post request to '/' inserts entry to table and redirects to '/'
-  burger.insertOne([
-    "burger_name"
-  ], [
-    req.body.burger_name
-  ], function() {
+  db.burger.create(req.body).then(function(dbBurger) {
     res.redirect("/");
+  }, function(e) {
+    res.redirect(404, "/");
   });
 });
 
 router.put("/:id", function(req, res) {
-  // put request to '/:id' updates the devoured entry for the id
-  var condition = "id = " + req.params.id;
+  var burgerId = parseInt(req.params.id, 10);
+  var body = _.pick(req.body, 'devoured');
+  var attributes = {};
 
-  burger.updateOne({
-    devoured: req.body.devoured
-  }, condition, function() {
-    res.redirect("/");
+  if (body.hasOwnProperty('devoured')) {
+    attributes.devoured = body.devoured;
+  }
+
+  db.burger.findById(burgerId).then(function(burger) {
+    if (burger) {
+      burger.update(attributes).then(function(burger) {
+        res.redirect("/");
+      }, function(e) {
+        res.redirect(404, "/");
+      });
+    } else {
+      res.redirect(404, "/");
+    }
+  }, function() {
+    res.redirect(500, "/");
   });
 });
 

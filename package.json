@@ -24,6 +24,8 @@
     "method-override": "^2.3.9",
     "mysql": "^2.13.0",
     "nodemon": "^1.11.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sequelize": "^3.28.0",
+    "underscore": "^1.8.3"
   }
 }

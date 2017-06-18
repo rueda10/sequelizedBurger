@@ -27,13 +27,6 @@ h2 {
   margin: 10px;
 }
 
-/* ERROR MESSAGE */
-.error-message {
-  margin-top: 20px;
-  text-align: center;
-  color: red;
-}
-
 /* BURGER DISPLAY */
 .burger-display {
   text-align: center;

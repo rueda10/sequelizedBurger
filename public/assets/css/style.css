@@ -27,6 +27,13 @@ h2 {
   margin: 10px;
 }
 
+/* ERROR MESSAGE */
+.error-message {
+  margin-top: 20px;
+  text-align: center;
+  color: red;
+}
+
 /* BURGER DISPLAY */
 .burger-display {
   text-align: center;
@@ -39,22 +46,30 @@ h2 {
   vertical-align: top;
 }
 
-ul {
+.devour-it ul {
   border: thin solid black;
   padding: 20px 10px;
   list-style-type: none;
   margin: 0px 10px;
-  min-width: 330px;
+  min-width: 380px;
   min-height: 150px;
 }
 
-li form {
+.devoured ul {
+  border: thin solid black;
+  padding: 20px 10px;
+  list-style-type: none;
+  margin: 0px 10px;
+  min-width: 280px;
+  min-height: 150px;
+}
+.devour-it form {
   display: inline-block;
   float: right;
 }
 
-li form button {
-  float: right;
+.burger-item {
+  width: 100%;
 }
 
 .section-label {
@@ -62,4 +77,8 @@ li form button {
   margin: 0px 10px;
   min-width: 330px;
   padding: 0px 20px;
+}
+
+#name-input {
+  width: 85px;
 }

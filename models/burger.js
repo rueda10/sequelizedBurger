@@ -12,6 +12,17 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     }
-  });
+  },
+    {
+      classMethods: {
+        associate: function(models) {
+          Burger.belongsTo(models.user, {
+            foreignKey: {
+              allowNull: true
+            }
+          });
+        }
+      }
+    });
   return Burger;
 };
